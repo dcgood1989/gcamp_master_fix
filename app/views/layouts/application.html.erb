@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>LandingPage</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <nav class="navbar navbar-inverse">
+    <div class="container">
+      <<a class="navbar-brand" href="#">gCamp</a>
+    </div>
+  </nav>
+  <%= yield %>
+
+</body>
+</html>
+
+<footer class="navbar-bottom">
+  |<%= link_to "Terms", "/terms" %>|
+
+</footer>
