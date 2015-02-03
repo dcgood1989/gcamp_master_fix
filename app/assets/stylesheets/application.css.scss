@@ -15,10 +15,14 @@
  */
  @import 'bootstrap-sprockets';
  @import 'bootstrap';
- body { padding-bottom: 70px; }
+ body { padding-bottom: 70px;}
 
 .link_image{
-  width: 35px;
-  padding-right: 8px;
+  height: 30px;
+  width: 30px;
+  margin-right: 8px;
   float: right;
+
+.navbar-inner {
+  color: #FFF;
 }
