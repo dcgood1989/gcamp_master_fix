@@ -17,7 +17,7 @@ class TasksController < ApplicationController
       flash[:notice] = "Task was created successfully"
     redirect_to @task
   end
-end
+  end
 
   def edit
     @task = Task.find(params[:id])
@@ -30,6 +30,12 @@ end
     else
       render :edit
     end
+  end
+
+  def destroy
+    task = Task.find(params[:id])
+    task.destroy
+    redirect_to tasks_path, notice: "Deleted"
   end
 
   private
