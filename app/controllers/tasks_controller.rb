@@ -17,6 +17,7 @@ class TasksController < ApplicationController
       flash[:notice] = "Task was created successfully"
     redirect_to @task
   end
+
 end
 
   def edit
