@@ -8,9 +8,10 @@
       <%= f.text_field :description, class: "form-control", placeholder: "Description" %>
     </div>
   </div>
+
   <% unless @task.new_record? %>
     <div class="form-group">
-      <div class = "col-md-offset-1 col-md-6"
+      <div class = "col-md-offset-1 col-md-6">
         <%= f.check_box :complete %>
         <%= f.label :complete %>
       </div>
