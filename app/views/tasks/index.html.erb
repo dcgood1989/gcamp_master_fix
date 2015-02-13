@@ -15,13 +15,19 @@
    <tbody>
    <% @tasks.each do |tasks| %>
    <tr>
-     <td><%= link_to tasks.description, task_path(tasks) %>
-         <div class= "pull-right">
+     <td>
+       <% if tasks.complete %>
+          <s><%= link_to tasks.description, task_path(tasks) %></s>
+       <% else  %>
+       <%= link_to tasks.description, task_path(tasks) %>
+
+        <div class= "pull-right">
            <%= link_to "Edit", edit_task_path(tasks), class: "btn btn-info" %>
            <%= link_to "Delete", task_path(tasks), class: "btn btn-danger", method: :delete, data: {confirm: "Are you sure you want to delete"}%>
          </div>
      </td>
    </tr>
+    <% end%>
     <% end %>
    </tbody>
  </table>
