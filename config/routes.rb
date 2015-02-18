@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   get '/faq' => 'common_questions#index'
   get '/tasks' => 'tasks#index'
   get '/about' => 'about#index'
+  get '/users' => 'users#index'
   resources :tasks
+  resources :users
 
 end
