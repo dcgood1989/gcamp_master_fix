@@ -1,0 +1,25 @@
+.container
+  .pull-right
+    = link_to "New User", new_user_path, class: "btn btn-info margin-top-button2"
+  .page-header
+    %h1 Users
+
+  %table.table
+    %thead
+      %tr
+        %th
+          Name
+        %th{colspan:2}
+          Email
+    %tbody
+      - @users.each do |users|
+        %tr
+          %td
+            %u
+              = link_to users.first_name, user_path(users)
+              = link_to users.last_name, user_path(users)
+          %td
+            %u= link_to users.email, user_path(users)
+          %td
+            .pull-right
+              %u= link_to "Edit", edit_user_path(users)

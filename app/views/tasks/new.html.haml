@@ -1,0 +1,8 @@
+.container
+  %h1 Create a New Task
+
+  %ol.breadcrumb
+    %li
+      = link_to "Tasks", tasks_path
+    %li.active New User
+  = render partial:"form"
