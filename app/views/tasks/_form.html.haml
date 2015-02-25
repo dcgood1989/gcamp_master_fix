@@ -7,8 +7,9 @@
             =pluralize(@task.errors.count, "error")
             ="prohibited this form from being saved:"
           -@task.errors.full_messages.each do |message|
-            %li
-              = message
+            .ul
+              %li
+                = message
   .form-group
     = f.label :description, class: "col-md-1 control-label"
     .col-md-6

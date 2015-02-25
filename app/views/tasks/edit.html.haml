@@ -4,6 +4,9 @@
   %ol.breadcrumb
     %li
       = link_to "Tasks", tasks_path
-    %li.active New Task
+    %li
+      = @task.description
+
+    %li.active Edit Task
 
   = render partial: "form"
