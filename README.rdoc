@@ -24,5 +24,6 @@ Things you may want to cover:
 * ...
 
 [![Build Status](https://travis-ci.org/dcgood1989/Gcamp-real-.svg?branch=master)](https://travis-ci.org/dcgood1989/Gcamp-real-)
+https://travis-ci.org/dcgood1989/Gcamp-real-
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.
