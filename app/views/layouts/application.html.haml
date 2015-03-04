@@ -3,27 +3,53 @@
   = stylesheet_link_tag    'application', media: 'all'
   = javascript_include_tag 'application'
   = csrf_meta_tags
-%nav.navbar.navbar-inverse.navbar-fixed-top
-  .container
-    .navbar-brand{:href => "#"} gCamp
+%body
+  %nav.navbar.navbar-inverse.navbar-fixed-top
+    .container
+      .row
+        .navbar-header.col-md-12
+          %ul.nav.navbar-nav.navbar-right
+            -if current_user
+              %li= link_to "#{current_user.first_name} #{current_user.last_name}", user_path(current_user.id)
+              %li= link_to 'Sign Out', sign_out_path
+            -else
+              %li= link_to 'Sign Up', sign_up_path
+              %li= link_to 'Sign In', sign_in_path
+          = link_to "gCamp", root_path, class:"navbar-brand"
+
 .container
   - if flash[:notice]
-    .alert.alert-success= flash[:notice]
+    .alert.alert-success=flash[:notice]
+
+  - if flash[:error]
+    .alert.alert-danger=flash[:error]
+
+
+
 = yield
 .container
   %footer.navbar-bottom
     .page-header
-    = link_to "Terms", "/terms"
-    |
-    \#{link_to "About", "/about"}
-    |
-    \#{link_to "FAQ", "/faq"}
-    |
-    \#{link_to "Tasks", "/tasks"}
-    |
-    \#{link_to "Users", "/users"}
-    |
-    \#{link_to "Projects", "/projects"}
+      - if current_user
+        = link_to "Terms", "/terms"
+        |
+        \#{link_to "About", "/about"}
+        |
+        \#{link_to "FAQ", "/faq"}
+        |
+        \#{link_to "Tasks", "/tasks"}
+        |
+        \#{link_to "Users", "/users"}
+        |
+        \#{link_to "Projects", "/projects"}
+      - else
+        = link_to "Terms", "/terms"
+        |
+        \#{link_to "About", "/about"}
+        |
+        \#{link_to "FAQ", "/faq"}
+        |
+
 
     \#{link_to image_tag('galvinize.jpg', class: "link_image2"), "https://students.gschool.it/cohorts/8/students/279"}
     \#{link_to image_tag('Twitter.jpg', class: "link_image"), "https://twitter.com/dcgood1989"}

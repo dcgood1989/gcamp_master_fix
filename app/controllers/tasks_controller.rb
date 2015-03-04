@@ -1,4 +1,6 @@
 class TasksController < ApplicationController
+  before_action :ensure_current_user
+
   def index
     @tasks = Task.all
   end
@@ -14,11 +16,11 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
       if @task.save
-      flash[:notice] = "Task was created successfully"
-    redirect_to tasks_path
+        flash[:notice] = "Task was created successfully"
+        redirect_to tasks_path
       else
         render :new
-  end
+    end
   end
 
   def edit
@@ -45,6 +47,12 @@ class TasksController < ApplicationController
 
   def task_params
     params.require(:task).permit(:description, :complete, :due_date)
+  end
 
+  def ensure_current_user
+    unless current_user
+      flash[:error] = "You must sign in"
+      redirect_to sign_in_path
+    end
   end
 end

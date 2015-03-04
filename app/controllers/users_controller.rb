@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+
+  before_action :ensure_current_user
+
   def index
     @users = User.all
   end
@@ -34,6 +37,7 @@ class UsersController < ApplicationController
       render :edit
     end
   end
+
   def destroy
     user = User.find(params[:id])
     user.destroy
@@ -41,6 +45,13 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email)
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+  end
+
+  def ensure_current_user
+    unless current_user
+      flash[:error] = "You must sign in"
+      redirect_to sign_in_path
+    end
   end
 end

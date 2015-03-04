@@ -8,9 +8,14 @@ Rails.application.routes.draw do
   get '/terms' => 'terms#index'
   get '/faq' => 'common_questions#index'
   get '/tasks' => 'tasks#index'
-  get '/about' => 'about#index'
   get '/users' => 'users#index'
+  get '/about' => 'about#index'
   get '/projects' => 'projects#index'
+  get '/sign-up' => 'registrations#new'
+  post '/sign-up' => 'registrations#create'
+  get '/sign-out' => 'authentication#destroy'
+  get '/sign-in' => 'authentication#new'
+  post '/sign-in' => 'authentication#create'
   resources :tasks
   resources :users
   resources :projects
