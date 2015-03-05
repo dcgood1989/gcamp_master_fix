@@ -81,6 +81,7 @@ feature 'Existing user CRUD users' do
     click_on "Mark"
     click_on "Edit"
     click_on "Delete"
+    expect(page).to have_content "The user has been successfully deleted"
     expect(page).not_to have_content "Mark"
   end
   end
