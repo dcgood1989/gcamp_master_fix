@@ -7,7 +7,6 @@ Rails.application.routes.draw do
   root 'welcome#index'
   get '/terms' => 'terms#index'
   get '/faq' => 'common_questions#index'
-  get '/tasks' => 'tasks#index'
   get '/users' => 'users#index'
   get '/about' => 'about#index'
   get '/projects' => 'projects#index'
@@ -16,8 +15,10 @@ Rails.application.routes.draw do
   get '/sign-out' => 'authentication#destroy'
   get '/sign-in' => 'authentication#new'
   post '/sign-in' => 'authentication#create'
-  resources :tasks
-  resources :users
-  resources :projects
 
+  resources :users
+
+  resources :projects do
+    resources :tasks
+  end
 end

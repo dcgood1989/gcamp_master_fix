@@ -1,58 +1,63 @@
 class TasksController < ApplicationController
-  before_action :ensure_current_user
+ before_action :ensure_current_user
+ before_action do
+   @project = Project.find(params[:project_id])
+ end
 
-  def index
-    @tasks = Task.all
-  end
 
-  def new
-    @task = Task.new
-  end
+ def index
+   @tasks = @project.tasks
+ end
 
-  def show
-    @task = Task.find(params[:id])
-  end
+ def new
+   @task = @project.tasks.new
+ end
 
-  def create
-    @task = Task.new(task_params)
-      if @task.save
-        flash[:notice] = "Task was created successfully"
-        redirect_to tasks_path
-      else
-        render :new
-    end
-  end
+ def create
+   @task = @project.tasks.new(task_params)
+   if @task.save
+     flash[:notice] = "Task was successfully created"
+     redirect_to project_task_path(@project, @task)
+   else
+     render :new
+   end
+ end
 
-  def edit
-    @task = Task.find(params[:id])
-  end
+ def show
+   @task = @project.tasks.find(params[:id])
+ end
 
-  def update
-    @task = Task.find(params[:id])
-    if @task.update(task_params)
-      redirect_to task_path
-      flash[:notice] = "Task was edited successfully"
-    else
-      render :edit
-    end
-  end
+ def edit
+   @task = @project.tasks.find(params[:id])
+ end
 
-  def destroy
-    @task = Task.find(params[:id])
-    @task.destroy
-    redirect_to tasks_path, notice: "The task has been successfully deleted"
-  end
+ def update
+   @task = @project.tasks.find(params[:id])
+   if @task.update(task_params)
+   redirect_to project_tasks_path(@project, @task)
+   flash[:notice] = "Task was successfully updated"
+ else
+   render :edit
+ end
+ end
 
-  private
+ def destroy
+   task = @project.tasks.find(params[:id])
+   task.destroy
+   redirect_to project_tasks_path(@project), notice: "Task was successfully deleted"
+ end
 
-  def task_params
-    params.require(:task).permit(:description, :complete, :due_date)
-  end
+ private
 
-  def ensure_current_user
-    unless current_user
-      flash[:error] = "You must sign in"
-      redirect_to sign_in_path
-    end
-  end
+ def task_params
+   params.require(:task).permit(:description, :complete, :due_date, :project_id)
+ end
+
+ def ensure_current_user
+   unless current_user
+     flash[:error] = "You must sign in"
+     redirect_to sign_in_path
+   end
+ end
+
 end

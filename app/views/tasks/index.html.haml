@@ -1,26 +1,36 @@
 .container
   .page-header
     .pull-right
-      = link_to 'New Task', new_task_path, class: "btn btn-info"
-    %h1 Tasks
+      = link_to 'New Task', new_project_task_path, class: "btn btn-info"
+    %h1 Tasks for #{@project.name}
+
+  %ol.breadcrumb
+    %li
+      = link_to "Projects", projects_path
+    %li
+      = @project.name
+    %li.active Tasks
+
   %table.table
     %thead
       %tr
         %th Description
         %th Due On
     %tbody
-      - @tasks.each do |tasks|
+      - @tasks.each do |task|
         %tr
           %td
-            - if tasks.complete
+            - if task.complete
               %u
-                %s= link_to tasks.description, task_path(tasks)
+                %s
+                  = link_to task.description, project_task_path(@project, task)
             - else
-              %u= link_to tasks.description, task_path(tasks)
+              %u
+                = link_to task.description, project_task_path(@project, task)
           %td
-            - if tasks.due_date
-              = tasks.due_date.strftime("%m/%d/%Y")
+            - if task.due_date
+              = task.due_date.strftime("%m/%d/%Y")
           %td
             .pull-right
-              = link_to "Edit", edit_task_path(tasks), class: "btn btn-info"
-              = link_to "Delete", task_path(tasks), class: "btn btn-danger", method: :delete, data: {confirm: "Are you sure you want to delete"}
+              = link_to "Edit", edit_project_task_path(@project, task), class: "btn btn-info"
+              = link_to "Delete", project_task_path(@project, task), class: "btn btn-danger", method: :delete, data: {confirm: "Are you sure you want to delete"}
