@@ -17,7 +17,7 @@ class TasksController < ApplicationController
    @task = @project.tasks.new(task_params)
    if @task.save
      flash[:notice] = "Task was successfully created"
-     redirect_to project_task_path(@project, @task)
+     redirect_to project_tasks_path(@project)
    else
      render :new
    end
@@ -34,7 +34,7 @@ class TasksController < ApplicationController
  def update
    @task = @project.tasks.find(params[:id])
    if @task.update(task_params)
-   redirect_to project_tasks_path(@project, @task)
+   redirect_to project_task_path(@project, @task)
    flash[:notice] = "Task was successfully updated"
  else
    render :edit

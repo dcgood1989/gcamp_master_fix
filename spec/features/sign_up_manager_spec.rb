@@ -19,7 +19,7 @@ feature 'user signup' do
    fill_in :user_email, with: 'football@dog.com'
    fill_in :user_password, with: 'football'
    fill_in :user_password_confirmation, with: 'football'
-   click_button 'Sign up'
+   click_button 'Sign Up'
 
    expect(current_path).to eq '/'
    expect(page).to have_content 'You have successfully signed up'
