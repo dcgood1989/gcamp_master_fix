@@ -16,9 +16,12 @@ Rails.application.routes.draw do
   get '/sign-in' => 'authentication#new'
   post '/sign-in' => 'authentication#create'
 
+
   resources :users
+  resources :memberships
 
   resources :projects do
+    resources :memberships
     resources :tasks
   end
 end
