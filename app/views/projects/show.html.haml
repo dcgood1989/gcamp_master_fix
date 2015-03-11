@@ -10,7 +10,12 @@
     %li.active
       = @project.name
 
-  - if @project.tasks.count == 2
+  - if @project.tasks.count == 1
     = link_to "#{@project.tasks.count} Task", project_tasks_path(@project)
   - else
     = link_to "#{@project.tasks.count} Tasks", project_tasks_path(@project)
+    %br
+  - if @project.memberships.count == 1
+    = link_to "#{@project.memberships.count} Membership", project_memberships_path(@project)
+  - else
+    = link_to "#{@project.memberships.count} Memberships", project_memberships_path(@project)
