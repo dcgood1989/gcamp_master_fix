@@ -11,6 +11,9 @@ has_secure_password
     has_many :projects, through: :memberships
     has_many :memberships
 
+    has_many :tasks, through: :comments
+    has_many :comments
+
 
   def full_name
     "#{first_name} #{last_name}"
