@@ -28,8 +28,8 @@
 
 = yield
 .container
-  %footer.navbar-bottom
-    .page-header
+  %footer
+    %hr
       - if current_user
         = link_to "Terms", "/terms"
         |
@@ -49,7 +49,7 @@
         |
 
 
-    \#{link_to image_tag('galvinize.jpg', class: "link_image2"), "https://students.gschool.it/cohorts/8/students/279"}
-    \#{link_to image_tag('Twitter.jpg', class: "link_image"), "https://twitter.com/dcgood1989"}
-    \#{link_to image_tag('Github.jpg', class: "link_image"), "https://github.com/dcgood1989"}
-    \#{link_to image_tag('Linkedin.jpg', class: "link_image"), "www.linkedin.com/pub/dillon-good/b1/257/634/"}
+      \#{link_to image_tag('galvinize.jpg', class: "link_image2"), "https://students.gschool.it/cohorts/8/students/279"}
+      \#{link_to image_tag('Twitter.jpg', class: "link_image"), "https://twitter.com/dcgood1989"}
+      \#{link_to image_tag('Github.jpg', class: "link_image"), "https://github.com/dcgood1989"}
+      \#{link_to image_tag('Linkedin.jpg', class: "link_image"), "www.linkedin.com/pub/dillon-good/b1/257/634/"}
