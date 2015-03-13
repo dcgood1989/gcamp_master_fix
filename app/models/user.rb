@@ -8,10 +8,10 @@ has_secure_password
     validates :email, uniqueness: true
     validates :password, presence: true
 
-    has_many :projects, through: :memberships
-    has_many :memberships
+    has_many :projects, through: :memberships, dependent: :destroy
+    has_many :memberships, dependent: :destroy
 
-    has_many :tasks, through: :comments
+    has_many :tasks, through: :comments, dependent: :destroy
     has_many :comments
 
 
