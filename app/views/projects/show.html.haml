@@ -1,6 +1,5 @@
 .container
   .page-header
-    = link_to "Delete", project_path(@project), class: "btn btn-danger pull-right margin-left-button", method: :delete, data: {confirm: "Are you sure you want to delete"}
     = link_to "Edit", edit_project_path, class: "btn btn-primary pull-right"
     %h1= @project.name
 
@@ -19,3 +18,10 @@
     = link_to "#{@project.memberships.count} Membership", project_memberships_path(@project)
   - else
     = link_to "#{@project.memberships.count} Memberships", project_memberships_path(@project)
+
+
+  .well
+    %h3 Delete Project
+    %p= "Deleting this project will also delete #{pluralize(@project.memberships.count, 'membership')} #{pluralize(@project.tasks.count, 'task')}, and associated comments"
+
+    = link_to "Delete", project_path(@project), class: "btn btn-danger", method: :delete, data: {confirm: "Are you sure you want to delete"}
