@@ -97,7 +97,7 @@ feature 'Existing users CRUD task' do
     fill_in :Description, with: 'heyo'
     click_on "Create Task"
 
-    click_on "Delete"
+    page.find('.glyphicon-remove').click
     expect(page).to have_content 'Task was successfully deleted'
     expect(page).not_to have_content 'heyo'
 
