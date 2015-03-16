@@ -35,6 +35,7 @@ class MembershipsController < ApplicationController
     flash[:notice] = "#{membership.user.full_name} was successfully deleted"
   end
 
+private
 
   def membership_params
     params.require(:membership).permit(:roles, :user_id, :project_id)

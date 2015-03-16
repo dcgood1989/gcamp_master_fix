@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
   resources :projects do
     resources :tasks do
-      resources :comments
+      resources :comments, only:[:create]
     end
     resources :memberships
   end
