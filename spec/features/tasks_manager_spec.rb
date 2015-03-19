@@ -17,7 +17,7 @@ feature 'Existing users CRUD task' do
     crud.save!
 
     sign_in_user
-    expect(current_path).to eq root_path
+    expect(current_path).to eq projects_path
 
     click_on 'Projects'
     click_on 'homework'

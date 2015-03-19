@@ -26,7 +26,7 @@ feature "sign in" do
 
    click_button "Sign In"
 
-   expect(current_path).to eq root_path
+   expect(current_path).to eq projects_path
 
 end
 

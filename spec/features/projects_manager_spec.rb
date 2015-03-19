@@ -12,7 +12,7 @@ feature 'Existing users CRUD projects' do
     crud.save!
 
     sign_in_user
-    expect(current_path).to eq root_path
+    expect(current_path).to eq projects_path
 
     visit projects_path
     expect(page).to have_content "Name"
@@ -23,7 +23,9 @@ end
 
     sign_in_user
     visit projects_path
-    click_on 'New Project'
+    within(".dropdown") do
+      click_on 'New Project'
+    end
 
     expect(current_path).to eq new_project_path
 
