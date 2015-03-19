@@ -51,7 +51,7 @@ namespace :cleanies do
   desc "Removes any memberships with a null user_id"
     task list: :environment do
         Membership.where(user_id: nil).destroy_all
-        puts "ful"
+        puts "friend"
   end
 
 end

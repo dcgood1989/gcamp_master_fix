@@ -1,6 +1,6 @@
-class CommentsController < ApplicationController
+class CommentsController < PrivateController
 
-  
+
   before_action do
     @project = Project.find(params[:project_id])
     @task = @project.tasks.find(params[:task_id])
