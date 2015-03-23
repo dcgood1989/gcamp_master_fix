@@ -11,9 +11,11 @@ class ProjectsController < PrivateController
 
   def create
     @project = Project.new(project_params)
-      if @project.save
+    @user = current_user
+    if @project.save
       flash[:notice] = "Project was created successfully"
       redirect_to project_path(@project)
+      @project.memberships.create!(roles: 2, user_id: @user.id)
     else
       render :new
     end
@@ -43,7 +45,7 @@ class ProjectsController < PrivateController
     redirect_to projects_path, notice: "The project has been successfully deleted"
   end
 
-private
+  private
 
   def project_params
     params.require(:project).permit(:name)
