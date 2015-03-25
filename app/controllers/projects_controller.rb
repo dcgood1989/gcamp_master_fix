@@ -1,9 +1,10 @@
 class ProjectsController < PrivateController
   before_action :ensure_current_user
-  # before_action :ensure_project_member
+  before_action :verify_membership
 
   def index
     @projects = current_user.projects
+    @membership = Membership.all
   end
 
   def new
@@ -58,18 +59,4 @@ class ProjectsController < PrivateController
       redirect_to sign_in_path
     end
   end
-
-  # # def ensure_project_member
-  # #   if current_user.project == true
-  # #     redirect_to root_path
-  # #   else
-  # #     flash[:error] = ""
-  # # end
-  #
-  #
-  #
-  # end
-
-
-
 end
