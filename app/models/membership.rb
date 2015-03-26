@@ -6,4 +6,5 @@ validates :user, uniqueness: {scope: :project_id, message: 'has already been add
 validates :user, presence: true
 
 ROLE = ['Member', 'Owner']
+
 end
