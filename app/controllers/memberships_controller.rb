@@ -1,8 +1,10 @@
 class MembershipsController < PrivateController
-
   before_action do
     @project = Project.find(params[:project_id])
   end
+  before_action :verify_membership
+  before_action :verify_membership, except: [:new, :create, :index]
+  before_action :verify_owner, only: [:edit]
 
   def index
     @membership = @project.memberships.new

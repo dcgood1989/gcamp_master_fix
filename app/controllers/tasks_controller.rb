@@ -3,7 +3,7 @@ class TasksController < PrivateController
   before_action do
     @project = Project.find(params[:project_id])
   end
-
+  before_action :verify_membership
 
   def index
     @tasks = @project.tasks
