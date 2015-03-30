@@ -7,4 +7,14 @@ validates :user, presence: true
 
 ROLE = ['Member', 'Owner']
 
+
+def membership_content(membership)
+  if membership.roles == 2
+    "Owner"
+  else
+    "Member"
+  end
+end
+
+
 end

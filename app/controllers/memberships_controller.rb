@@ -32,7 +32,7 @@ class MembershipsController < PrivateController
   def destroy
     membership = Membership.find(params[:id])
     membership.destroy
-    redirect_to project_memberships_path(@project.id)
+    redirect_to projects_path
     flash[:notice] = "#{membership.user.full_name} was successfully deleted"
   end
 
