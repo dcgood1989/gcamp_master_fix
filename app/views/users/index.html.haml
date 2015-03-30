@@ -12,14 +12,16 @@
         %th{colspan:2}
           Email
     %tbody
-      - @users.each do |users|
+      - @users.each do |user|
         %tr
           %td
             %u
-              = link_to users.first_name, user_path(users)
-              = link_to users.last_name, user_path(users)
+              = link_to user.first_name, user_path(user)
+              = link_to user.last_name, user_path(user)
           %td
-            %u= link_to users.email, user_path(users)
+            - if current_user == user
+              %u= link_to user.email, user_path(user)
           %td
             .pull-right
-              %u= link_to "Edit", edit_user_path(users)
+              - if current_user == @user
+                %u= link_to "Edit", edit_user_path(user)

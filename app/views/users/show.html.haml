@@ -1,20 +1,22 @@
 .container
   .page-header
-    = link_to "Edit", edit_user_path, class: "btn btn-primary pull-right"
-    %h1
-      = @user.first_name
-      = @user.last_name
-  %dl.dl-horizontal
-    %p
-      %dt
-        %b First Name
-      %dd= @user.first_name
-    %p
-      %dt
-        %b Last Name
-      %dd= @user.last_name
-    %p
-      %dt
-        %b Email
-      %dd
-        %u= mail_to @user.email
+    - if current_user == @user
+      = link_to "Edit", edit_user_path, class: "btn btn-primary pull-right"
+      %h1
+        = @user.first_name
+        = @user.last_name
+    %dl.dl-horizontal
+      %p
+        %dt
+          %b First Name
+        %dd= @user.first_name
+      %p
+        %dt
+          %b Last Name
+        %dd= @user.last_name
+      %p
+        %dt
+          %b Email
+        %dd
+          - if current_user == user
+            %u= mail_to @user.email
