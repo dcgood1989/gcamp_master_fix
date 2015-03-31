@@ -15,11 +15,18 @@ class AuthenticationController < ApplicationController
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       flash[:notice] = "Successfully signed in"
-      redirect_to projects_path
+      if session[:previous_page] == nil
+        redirect_to projects_path
+      else
+        redirect_to session[:previous_page]
+        session[:previous_page] = nil
+      end
     else
       @authentication_error = "Email/Password combination is invalid"
       render :new
     end
   end
+
+
 
 end

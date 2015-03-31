@@ -21,7 +21,7 @@ class ProjectsController < PrivateController
     @user = current_user
     if @project.save
       flash[:notice] = "Project was created successfully"
-      redirect_to project_tasks_path(@project)
+        redirect_to project_tasks_path(@project)
       @project.memberships.create!(roles: 2, user_id: @user.id)
     else
       render :new
@@ -64,5 +64,5 @@ class ProjectsController < PrivateController
       redirect_to sign_in_path
     end
   end
-  
+
 end

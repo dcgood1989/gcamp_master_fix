@@ -3,11 +3,11 @@ class MembershipsController < PrivateController
   before_action do
     @project = Project.find(params[:project_id])
   end
+  before_action :ensure_current_user
   before_action :logged_in_users_without_access, only:[:edit, :update, :destroy]
   before_action :verify_membership, except: [:new, :create, :index]
   before_action :verify_owner, only: [:edit]
   before_action :ensure_last_owner, only: [:update, :destroy]
-
 
 
   def index
@@ -47,7 +47,7 @@ private
   end
 
   def logged_in_users_without_access
-    unless current_user.memberships.pluck(:project_id).include?(@project.id) 
+    unless current_user.memberships.pluck(:project_id).include?(@project.id)
       flash[:error] = "You do not have access"
       redirect_to project_path(@project)
     end
@@ -60,6 +60,14 @@ private
           flash[:error] = "Projects must have at least one owner"
           redirect_to project_memberships_path(@project)
         end
+      end
+    end
+
+    def ensure_current_user
+      unless current_user
+        session[:previous_page] = request.fullpath
+        flash[:error] = "You must sign in"
+        redirect_to sign_in_path
       end
     end
 
