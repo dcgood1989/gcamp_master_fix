@@ -26,5 +26,4 @@ helper_method :current_user
    end
 
 
-
 end

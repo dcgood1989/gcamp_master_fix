@@ -1,5 +1,5 @@
 class UsersController < PrivateController
-
+  helper_method :project_members
   before_action :ensure_current_user
   before_action :set_user, only: [:edit, :update, :destroy]
   before_action :cant_edit_other_users, only: [:edit, :update, :destroy]
@@ -43,7 +43,7 @@ class UsersController < PrivateController
   def destroy
     user = User.find(params[:id])
     if user == current_user && user.destroy
-      redirect_to users_path, notice: "The user has been successfully deleted"
+      redirect_to root_path, notice: "User was successfully deleted"
     else
       redirect_to users_path
     end
@@ -89,5 +89,13 @@ private
   def membership_owner_or_admin(project)
     self.memberships.where(project_id: project.id).roles == 2 || self.admin
   end
+
+  def project_members(user1, user2)
+    unless user2.projects.where(id: user1.projects) == []
+      true
+    end
+  end
+
+
 
 end
