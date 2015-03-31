@@ -22,7 +22,7 @@
 
   .row
     .col-md-7
-      - if current_user.membership_owner(@project)
+      - if current_user.membership_owner_or_admin(@project)
         = form_for [@project, @membership], html: { class: "form-inline"} do |f|
           .well
             .form-group
@@ -43,7 +43,7 @@
                   %td
                     = link_to membership.user.full_name, user_path(membership.user)
                   %td
-                    - if current_user.membership_owner(@project)
+                    - if current_user.membership_owner_or_admin(@project)
                       = f.select(:roles, [["Member", 1], ["Owner", 2]], {}, {class: 'form-control'})
                       %td
                         = f.submit "update", {class: "btn btn-primary"}

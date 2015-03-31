@@ -30,7 +30,7 @@
                       %li= link_to 'New Project', new_project_path
               %li
                 %a{:href => users_path} Users
-.container  
+.container
   - if flash[:notice]
     .alert.alert-success=flash[:notice]
 
@@ -42,7 +42,7 @@
 .container.text-center
   %footer
     %hr
-      - if current_user
+      - if current_user || current_user.admin
         \#{link_to "Home", "/"}
         |
         \#{link_to "Terms", "/terms"}

@@ -52,7 +52,11 @@ class UsersController < PrivateController
 private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+    if current_user.admin
+      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :admin)
+    else
+      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+    end
   end
 
   def ensure_current_user
@@ -63,13 +67,25 @@ private
   end
 
   def cant_edit_other_users
-    if current_user != @user
-      render file: 'public/404.html', status: :not_found, layout: false
+    unless current_user.admin == true
+      if current_user != @user
+        render file: 'public/404.html', status: :not_found, layout: false
+      else
+        current_user.admin
+      end
     end
   end
 
   def set_user
     @user = User.find(params[:id])
+  end
+
+  def membership(project)
+    self.memberships.find_by(project_id: project.id) != nil
+  end
+
+  def membership_owner_or_admin(project)
+    self.memberships.where(project_id: project.id).roles == 2 || self.admin
   end
 
 end

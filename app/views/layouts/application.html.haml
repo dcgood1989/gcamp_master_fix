@@ -38,7 +38,7 @@
         \#{link_to "Users", "/users"}
         |
         \#{link_to "Projects", "/projects"}
-      - else
+      - else current_user
         = link_to "Terms", "/terms"
         |
         \#{link_to "About", "/about"}

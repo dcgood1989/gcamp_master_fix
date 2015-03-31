@@ -8,14 +8,14 @@ helper_method :current_user
   end
 
   def verify_membership
-    unless current_user.membership(@project)
+    unless current_user.membership(@project) || current_user.admin
       flash[:error] = "You do not have access to that project"
       redirect_to projects_path
     end
   end
 
   def verify_owner
-     unless current_user.membership_owner(@project)
+     unless current_user.membership_owner_or_admin(@project) || current_user.admin
        flash[:error] = "You do not have access to that project"
        redirect_to projects_path(@project)
      end

@@ -21,10 +21,10 @@ class User < ActiveRecord::Base
 
 
   def membership(project)
-    self.memberships.find_by(project_id: project.id)!=nil
+    self.memberships.find_by(project_id: project.id) != nil
   end
 
-  def membership_owner(project)
-    self.memberships.find_by(project_id: project.id).roles == 2
+  def membership_owner_or_admin(project)
+    self.memberships.where(project_id: project.id, roles: 2).present? || self.admin
   end
 end

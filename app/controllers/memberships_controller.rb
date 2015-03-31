@@ -47,7 +47,7 @@ private
   end
 
   def logged_in_users_without_access
-    if !current_user.memberships.pluck(:project_id).include?(@project.id)
+    unless current_user.memberships.pluck(:project_id).include?(@project.id) 
       flash[:error] = "You do not have access"
       redirect_to project_path(@project)
     end
@@ -62,5 +62,6 @@ private
         end
       end
     end
+
 
 end
