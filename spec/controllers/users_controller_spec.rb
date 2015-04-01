@@ -19,10 +19,10 @@ describe UsersController do
 
     it "renders the index page" do
       get :index
-      expect(response). to render_template ("index")
+      expect(response). to render_template("index")
     end
 
-    it 'does not display index for users that are not logged in' do
+    it "does not display index for users that are not logged in" do
       session.clear
       get :index
       expect(response).to redirect_to sign_in_path
@@ -72,7 +72,7 @@ describe UsersController do
       end
 
 
-      it 'does not display show for users that are not logged in' do
+      it "does not display show for users that are not logged in" do
         session.clear
         get :show, id: @user
         expect(response).to redirect_to sign_in_path
@@ -94,7 +94,6 @@ describe UsersController do
         get :edit, id: @user
         expect(response).to redirect_to sign_in_path
       end
-
     end
 
     describe "#update" do
@@ -129,7 +128,7 @@ describe UsersController do
       end
     end
 
-    describe 'DELETE #destroy' do
+    describe '#destroy' do
       it 'deletes a user and not comments' do
         comment = create_comment(user_id: @user.id)
 

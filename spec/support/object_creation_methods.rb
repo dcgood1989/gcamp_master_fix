@@ -32,3 +32,11 @@ def create_comment(options={})
     task_id: create_task.id
     }.merge(options))
 end
+
+def create_membership(options={})
+  Membership.create!({
+    roles: "Owner",
+    project_id: create_project.id,
+    user_id: create_user.id
+  }.merge(options))
+end
