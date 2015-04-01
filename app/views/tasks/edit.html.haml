@@ -5,9 +5,9 @@
     %li
       = link_to "Projects", projects_path
     %li
-      = link_to "Tasks", project_tasks_path
+      = link_to @project.name, project_path(@project)
     %li
-      = @task.description
+      = link_to "Tasks", project_tasks_path
     %li.active Edit Task
 
   = render partial: "form"
