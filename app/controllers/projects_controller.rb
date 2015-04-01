@@ -10,6 +10,8 @@ class ProjectsController < PrivateController
     @projects = current_user.projects
     @membership = Membership.all
     @project_admins = Project.all
+    tracker_api = TrackerAPI.new
+    @tracker_projects = tracker_api.projects(current_user.pivotal_tracker_token)
   end
 
   def new
