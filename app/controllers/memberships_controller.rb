@@ -4,9 +4,9 @@ class MembershipsController < PrivateController
     @project = Project.find(params[:project_id])
   end
   before_action :ensure_current_user
-  before_action :logged_in_users_without_access, only:[:edit, :update, :destroy]
-  before_action :verify_membership, except: [:new, :create, :index]
-  before_action :verify_owner, only: [:edit]
+  before_action :logged_in_users_without_access, only:[:edit, :update, :destroy, :show]
+  before_action :verify_membership, except: [:new, :create]
+  before_action :verify_owner, only: [:edit, :update, :destroy]
   before_action :ensure_last_owner, only: [:update, :destroy]
 
 
@@ -43,7 +43,11 @@ class MembershipsController < PrivateController
 private
 
   def membership_params
-    params.require(:membership).permit(:roles, :user_id, :project_id)
+    if current_user.admin
+      params.require(:membership).permit(:roles, :user_id, :project_id)
+    else
+      params.require(:membership).permit(:roles, :user_id)
+    end
   end
 
   def logged_in_users_without_access
@@ -70,6 +74,8 @@ private
         redirect_to sign_in_path
       end
     end
+
+
 
 
 end

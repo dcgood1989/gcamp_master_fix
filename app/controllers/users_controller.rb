@@ -31,6 +31,7 @@ class UsersController < PrivateController
   end
 
   def update
+    # if params.admin == true && current_user.admin
     @user = User.find(params[:id])
     if @user.update(user_params)
       redirect_to users_path
