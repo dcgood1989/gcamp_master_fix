@@ -1,4 +1,5 @@
 class UsersController < PrivateController
+  helper_method :project_members
   before_action :ensure_current_user
   before_action :set_user, only: [:edit, :update, :destroy]
   before_action :cant_edit_other_users, only: [:edit, :update, :destroy]
@@ -52,9 +53,9 @@ private
 
   def user_params
     if current_user.admin
-      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :admin, :pivotal_tracker_token)
+      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :admin)
     else
-      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :pivotal_tracker_token)
+      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
     end
   end
 

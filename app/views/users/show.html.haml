@@ -20,8 +20,3 @@
         %dd
           - if current_user == @user || current_user.admin || project_members(current_user, @user)
             %u= mail_to @user.email
-      %p
-        %dt
-          %b Pivotal Tracker Token
-        %dd
-          = @user.pivotal_tracker_token[0...4]+"**********************"
