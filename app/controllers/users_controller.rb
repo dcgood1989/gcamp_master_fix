@@ -90,12 +90,6 @@ private
     self.memberships.where(project_id: project.id).roles == 2 || self.admin
   end
 
-  def project_members(user1, user2)
-    unless user2.projects.where(id: user1.projects) == []
-      true
-    end
-  end
-
 
 
 end

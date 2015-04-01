@@ -3,6 +3,8 @@
 
   %ol.breadcrumb
     %li
+      = link_to "Projects", projects_path
+    %li
       = link_to "Tasks", project_tasks_path
     %li.active New Task
   = render partial:"form"
