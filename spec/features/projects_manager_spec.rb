@@ -36,7 +36,7 @@ end
     expect(page).to have_content 'Capybara'
 end
 
-scenario "does not link to show if not a part of the project" do
+scenario "link to show" do
 
    errands = Project.new(name: 'errands')
    errands.save!
