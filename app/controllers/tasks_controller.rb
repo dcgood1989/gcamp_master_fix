@@ -61,5 +61,4 @@ class TasksController < PrivateController
       redirect_to sign_in_path
     end
   end
-
 end
