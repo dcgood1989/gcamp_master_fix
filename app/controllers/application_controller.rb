@@ -25,5 +25,8 @@ helper_method :current_user
      @project = Project.find(params[:id])
    end
 
+   def membership_owner_or_admin(project)
+     self.memberships.where(project_id: project.id, roles: 2).present? || self.admin
+   end
 
 end

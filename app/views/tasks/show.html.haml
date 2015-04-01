@@ -11,8 +11,7 @@
 
       .col-md-5
         .pull-right
-          - unless :verify_owner
-            =  link_to "Edit", edit_project_task_path(@project, @task), class: "btn btn-info margin-top-button"
+          =  link_to "Edit", edit_project_task_path(@project, @task), class: "btn btn-info margin-top-button"
 
   %ol.breadcrumb
     %li
