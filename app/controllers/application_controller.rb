@@ -29,4 +29,9 @@ helper_method :current_user
      self.memberships.where(project_id: project.id, roles: 2).present? || self.admin
    end
 
+   def same_project(user1, user2)
+     unless user2.projects.where(id: user1.projects) == []
+       true
+     end
+   end
 end
