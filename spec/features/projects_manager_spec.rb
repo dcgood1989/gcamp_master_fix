@@ -5,6 +5,7 @@ feature 'Existing users CRUD projects' do
   before :each do
     User.destroy_all
     Project.destroy_all
+    create_user
   end
 
   scenario "index lists all prjects with name" do
@@ -35,30 +36,26 @@ end
     expect(page).to have_content 'Capybara'
 end
 
-scenario "index links to show via the name" do
+scenario "does not link to show if not a part of the project" do
 
    errands = Project.new(name: 'errands')
    errands.save!
 
    sign_in_user
-   visit projects_path
-
-   click_link 'errands'
+   expect(current_path).to eq projects_path
 
    expect(page).to have_content "errands"
 end
-  scenario "can edit project" do
-
-    project = Project.new(name: 'grow a beard')
-    project.save!
+  scenario "members can edit project" do
 
     sign_in_user
-    visit projects_path
-    click_on 'grow a beard'
+    project = create_project
+    membership = create_membership
+    project.save!
 
-    click_on "Edit"
+    expect(current_path).to eq projects_path
 
-    expect(page).to have_content "Edit Project"
+    visit edit_project_path(project)
 
     fill_in :project_name, with: "stuffs"
     click_button 'Update Project'

@@ -77,11 +77,11 @@ feature 'Existing user CRUD users' do
     user.save!
 
     sign_in_user
-    visit users_path
-    click_on "Mark"
-    click_on "Edit"
+    visit edit_user_path(user)
+
+
     click_on "Delete"
-    expect(page).to have_content "The user has been successfully deleted"
-    expect(page).not_to have_content "Mark"
+    expect(page).to have_content "User was successfully deleted"
+  
   end
   end

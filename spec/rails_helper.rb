@@ -43,14 +43,7 @@ RSpec.configure do |config|
   #     RSpec.describe UsersController, :type => :controller do
   #       # ...
   #     end
-  def sign_in_user
-    user = User.new(first_name: 'Don', last_name: 'Johnson', email: 'hawaii50@gmail.com', password: 'hawaii', password_confirmation: 'hawaii')
-    user.save!
-    visit sign_in_path
-    fill_in :email, with: 'hawaii50@gmail.com'
-    fill_in :password, with: 'hawaii'
-    click_button 'Sign In'
-  end
+
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!

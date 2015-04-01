@@ -1,3 +1,11 @@
+def sign_in_user
+  user = User.new(first_name: 'Don', last_name: 'Johnson', email: 'hawaii50@gmail.com', password: 'hawaii', password_confirmation: 'hawaii', admin: true)
+  user.save!
+  visit sign_in_path
+  fill_in :email, with: 'hawaii50@gmail.com'
+  fill_in :password, with: 'hawaii'
+  click_button 'Sign In'
+end
 
 def create_user(options={})
   User.create!({

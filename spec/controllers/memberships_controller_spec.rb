@@ -70,26 +70,22 @@ describe MembershipsController do
   describe "#destroy" do
 
    it "allows owners and admins to delete a task" do
-     @user_admin = create_user
-     session[:user_id] = @user_admin.id
-     @user = create_user
-     session[:user_id] = @user.id
-     project = create_project
-     membership_admin = create_membership(user_id: @user_admin.id, project_id: project.id, roles: "Owner")
-     membership = create_membership(user_id: @user.id, project_id: project.id, roles: "Member")
+    @user_admin = create_user
+    session[:user_id] = @user_admin.id
+    @user = create_user
+    session[:user_id] = @user.id
+    project = create_project
+    membership_admin = create_membership(user_id: @user_admin.id, project_id: project.id, roles: "Owner")
+    membership = create_membership(user_id: @user.id, project_id: project.id, roles: "Member")
 
-     expect{
-       delete :destroy, project_id: project.id, id: membership.id
-     }.to change {Membership.all.count}.by(-1)
+    expect{
+      delete :destroy, project_id: project.id, id: membership.id
+    }.to change {Membership.all.count}.by(-1)
 
-     expect(response).to redirect_to projects_path
-     expect(flash[:notice]).to eq("Randall Savage was successfully deleted")
-   end
-
-
-
-
- end
+      expect(response).to redirect_to projects_path
+      expect(flash[:notice]).to eq("Randall Savage was successfully deleted")
+    end
+  end
 
 
 
