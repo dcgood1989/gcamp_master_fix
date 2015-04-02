@@ -21,8 +21,9 @@
           = mail_to @user.email
         %dt
         -if @user.pivotal_tracker_token
-          %b Pivotal Tracker Token
-          %dd
-            = @user.pivotal_tracker_token[0...4]+"**********"
-        -else
-          %dd
+          %p
+            %dt
+              %b Pivotal Tracker Token
+            %dd= @user.pivotal_tracker_token[0...4]+"**********"
+          %p
+            %dt
