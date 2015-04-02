@@ -35,10 +35,14 @@ class MembershipsController < PrivateController
 
   def destroy
     membership = Membership.find(params[:id])
-    membership.destroy
-    redirect_to projects_path
-    flash[:notice] = "#{membership.user.full_name} was successfully deleted"
+    if membership.destroy && current_user == @user
+      redirect_to projects_path
+      flash[:notice] = "#{membership.user.full_name} was successfully deleted"
+    else
+      redirect_to project_memberships_path
+      flash[:notice] = "#{membership.user.full_name} was successfully deleted"
   end
+end
 
 private
 
@@ -67,15 +71,11 @@ private
       end
     end
 
-    def ensure_current_user
-      unless current_user
-        session[:previous_page] = request.fullpath
-        flash[:error] = "You must sign in"
-        redirect_to sign_in_path
-      end
+  def ensure_current_user
+    unless current_user
+      session[:previous_page] = request.fullpath
+      flash[:error] = "You must sign in"
+      redirect_to sign_in_path
     end
-
-
-
-
+  end
 end

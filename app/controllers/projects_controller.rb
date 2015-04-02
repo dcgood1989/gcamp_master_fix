@@ -3,7 +3,7 @@ class ProjectsController < PrivateController
   before_action :ensure_current_user
   before_action :set_project, except: [:new, :create, :index]
   before_action :verify_membership, except: [:new, :create, :index]
-  before_action :verify_owner, only: [:edit]
+  before_action :verify_owner, only: [:edit, :update, :delete]
 
 
   def index
