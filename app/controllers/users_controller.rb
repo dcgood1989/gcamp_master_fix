@@ -31,9 +31,8 @@ class UsersController < PrivateController
   end
 
   def update
-    # if params.admin == true && current_user.admin
     @user = User.find(params[:id])
-    if @user.update(user_params)
+    if @user.update(users_params)
       redirect_to users_path
       flash[:notice] = "User was edited successfully"
     else
@@ -60,6 +59,9 @@ private
     end
   end
 
+  def users_params
+    params.require(:user).permit(:first_name, :last_name, :email, :pivotal_tracker_token)
+  end
 
   def ensure_current_user
     unless current_user

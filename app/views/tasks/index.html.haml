@@ -16,8 +16,10 @@
       %tr
         %th Description
         %th Due On
+        %th
     %tbody
       - @tasks.each do |task|
+
         %tr
           %td
             - if task.complete

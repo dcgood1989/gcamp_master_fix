@@ -53,6 +53,7 @@ class TasksController < PrivateController
   def task_params
     params.require(:task).permit(:description, :complete, :due_date, :project_id)
   end
+  
 
   def ensure_current_user
     unless current_user

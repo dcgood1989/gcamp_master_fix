@@ -5,9 +5,10 @@ class MembershipsController < PrivateController
   end
   before_action :ensure_current_user
   before_action :logged_in_users_without_access, only:[:edit, :update, :destroy]
-  before_action :verify_owner, only: [:edit, :update, :destroy, :index]
-  before_action :verify_membership, except: [:new, :create, :index, :destroy]
+  before_action :verify_owner, only: [:edit, :update, :destroy]
+  before_action :verify_membership, except: [:new, :create]
   before_action :ensure_last_owner, only: [:update, :destroy]
+  before_action :membership_member, only: [:destroy]
 
 
   def index
