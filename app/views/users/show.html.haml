@@ -1,12 +1,10 @@
 .container
   .page-header
     %h1
-      = @user.full_name
+      = "#{@user.first_name} #{@user.last_name}"
     - if current_user == @user
       = link_to "Edit", edit_user_path, class: "btn btn-primary pull-right"
       %h1
-        = @user.first_name
-        = @user.last_name
     %dl.dl-horizontal
       %p
         %dt
