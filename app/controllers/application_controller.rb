@@ -17,7 +17,7 @@ helper_method :current_user, :project_members
   def verify_owner
      unless current_user.membership_owner_or_admin(@project) || current_user.admin
        flash[:error] = "You do not have access to that project"
-       redirect_to projects_path(@project)
+       redirect_to project_path(@project)
      end
    end
 

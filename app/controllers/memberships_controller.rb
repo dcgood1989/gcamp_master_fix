@@ -4,9 +4,9 @@ class MembershipsController < PrivateController
     @project = Project.find(params[:project_id])
   end
   before_action :ensure_current_user
-  before_action :logged_in_users_without_access, only:[:edit, :update, :destroy, :show]
-  before_action :verify_membership, except: [:new, :create]
-  before_action :verify_owner, only: [:edit, :update, :destroy]
+  before_action :logged_in_users_without_access, only:[:edit, :update, :destroy]
+  before_action :verify_owner, only: [:edit, :update]
+  before_action :verify_membership, except: [:new, :create, :index, :destroy]
   before_action :ensure_last_owner, only: [:update, :destroy]
 
 
@@ -46,12 +46,12 @@ private
     if current_user.admin
       params.require(:membership).permit(:roles, :user_id, :project_id)
     else
-      params.require(:membership).permit(:roles, :user_id)
+      params.require(:membership).permit(:roles, :user_id, :project_id)
     end
   end
 
   def logged_in_users_without_access
-    unless current_user.memberships.pluck(:project_id).include?(@project.id)
+    unless current_user.memberships.pluck(:project_id).include?(@project.id) || current_user.admin
       flash[:error] = "You do not have access"
       redirect_to project_path(@project)
     end
