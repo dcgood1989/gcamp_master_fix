@@ -25,4 +25,5 @@ Rails.application.routes.draw do
     end
     resources :memberships
   end
+    resources :tracker_api
 end

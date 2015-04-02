@@ -12,7 +12,7 @@
           %th
             %b Tasks
       %tbody
-        - if current_user.admin  
+        - if current_user.admin
           - @project_admins.each do |project|
             %tr
               %td
@@ -27,3 +27,17 @@
                 = link_to project.name, project_path(project)
               %td
                 = link_to project.tasks.count, project_tasks_path(project, @task)
+    -if current_user.pivotal_tracker_token
+      %h1
+        .page-header
+          Pivotal Tracker Projects
+      %table.table
+        %thead
+          %tr
+            %th
+              %b Name
+          %tbody
+            -@tracker_projects.each do |project|
+              %tr
+                %td
+                  = link_to project[:name], tracker_api_path(project[:id], project_name: project[:name])
