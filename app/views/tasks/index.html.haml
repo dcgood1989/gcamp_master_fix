@@ -34,6 +34,6 @@
             - if task.due_date
               = task.due_date.strftime("%m/%d/%Y")
           %td
-            .pull-right
-              = link_to "Edit", edit_project_task_path(@project, task), class: "btn btn-info"
-              = link_to ' ', project_task_path(@project, task), method: :delete, class: "glyphicon glyphicon-remove"
+              .pull-right
+                = link_to "Edit", edit_project_task_path(@project, task), class: "btn btn-info"
+                = link_to ' ', project_task_path(@project, task), method: :delete, class: "glyphicon glyphicon-remove"
