@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-helper_method :current_user, :project_members
+helper_method :current_user, :project_members, :project_owner_or_admin_or_member, :project_owner_verify
   protect_from_forgery with: :exception
 
 
@@ -15,23 +15,32 @@ helper_method :current_user, :project_members
   end
 
   def verify_owner
-     unless current_user.membership_owner_or_admin(@project) || current_user.admin
-       flash[:error] = "You do not have access to that project"
-       redirect_to project_path(@project)
-     end
-   end
+    unless current_user.membership_owner_or_admin(@project) || current_user.admin
+      flash[:error] = "You do not have access to that project"
+      redirect_to project_path(@project)
+    end
+  end
 
-   def set_project
-     @project = Project.find(params[:id])
-   end
+  def verify_owner_or_membership
+    unless (current_user.membership_owner_or_admin(@project) || @membership.user == current_user)
+      flash[:error] = "You do not have access to that project"
+      redirect_to project_path(@project)
+    end
+  end
 
-   def membership_owner_or_admin(project)
-     self.memberships.where(project_id: project.id, roles: 2).present? || self.admin
-   end
 
-   def project_members(user1, user2)
-     unless user2.projects.where(id: user1.projects) == []
-       true
-     end
-   end
+
+  def set_project
+    @project = Project.find(params[:id])
+  end
+
+  def membership_owner_or_admin(project)
+    self.memberships.where(project_id: project.id, roles: 1).present? || self.admin
+  end
+
+  def project_members(user1, user2)
+    unless user2.projects.where(id: user1.projects) == []
+      true
+    end
+  end
 end

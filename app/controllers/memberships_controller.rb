@@ -3,11 +3,13 @@ class MembershipsController < PrivateController
   before_action do
     @project = Project.find(params[:project_id])
   end
-  before_action :ensure_current_user
+  before_action :find_membership, except: [:index, :create]
   before_action :logged_in_users_without_access, only:[:edit, :update, :destroy]
+  before_action :verify_membership, except: [:new, :create, :index]
   before_action :verify_owner, only: [:edit, :update]
-  before_action :verify_membership, except: [:new, :create]
+  before_action :verify_owner_or_membership, only: [:destroy]
   before_action :ensure_last_owner, only: [:update, :destroy]
+  before_action :ensure_current_user
 
 
   def index
@@ -35,14 +37,16 @@ class MembershipsController < PrivateController
 
   def destroy
     membership = Membership.find(params[:id])
-    if membership.destroy && current_user == @user
+    membership.destroy
+    if current_user.id == membership.user_id
+      flash[:notice] = "#{membership.user.full_name} was successfully deleted"
       redirect_to projects_path
-      flash[:notice] = "#{membership.user.full_name} was successfully deleted"
     else
-      redirect_to project_memberships_path
       flash[:notice] = "#{membership.user.full_name} was successfully deleted"
+      redirect_to project_memberships_path
   end
 end
+
 
 private
 
@@ -52,6 +56,10 @@ private
     else
       params.require(:membership).permit(:roles, :user_id, :project_id)
     end
+  end
+
+  def find_membership
+    @membership = Membership.find(params[:id])
   end
 
   def logged_in_users_without_access
@@ -78,4 +86,5 @@ private
       redirect_to sign_in_path
     end
   end
-end
+
+   end
