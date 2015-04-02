@@ -2,28 +2,27 @@
   .page-header
     %h1
       = "#{@user.first_name} #{@user.last_name}"
-    - if current_user == @user || current_user.admin
-      = link_to "Edit", edit_user_path, class: "btn btn-primary pull-right"
-      %h1
-    %dl.dl-horizontal
-      %p
-        %dt
-          %b First Name
-        %dd= @user.first_name
-      %p
-        %dt
-          %b Last Name
-        %dd= @user.last_name
-      %p
-        %dt
-          %b Email
-        %dd
-          = mail_to @user.email
-        %dt
-        -if @user.pivotal_tracker_token
-          %p
-            %dt
-              %b Pivotal Tracker Token
-            %dd= @user.pivotal_tracker_token[0...4]+"**********"
-          %p
-            %dt
+      - if current_user == @user || current_user.admin
+        = link_to "Edit", edit_user_path, class: "btn btn-primary pull-right"
+  %dl.dl-horizontal
+    %p
+      %dt
+        %b First Name
+      %dd= @user.first_name
+    %p
+      %dt
+        %b Last Name
+      %dd= @user.last_name
+    %p
+      %dt
+        %b Email
+      %dd
+        = mail_to @user.email
+      %dt
+      -if @user.pivotal_tracker_token
+        %p
+          %dt
+            %b Pivotal Tracker Token
+          %dd= @user.pivotal_tracker_token[0...4]+"**********"
+        %p
+          %dt
