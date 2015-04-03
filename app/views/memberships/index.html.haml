@@ -59,3 +59,5 @@
                           = membership.membership_content(membership)
                         - if current_user.id == membership.user_id
                           %td= link_to ' ', project_membership_path(@project, membership), method: :delete, class: "glyphicon glyphicon-remove"
+                      %td
+                      %td
