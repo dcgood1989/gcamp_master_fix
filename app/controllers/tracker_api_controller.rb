@@ -7,5 +7,4 @@ class TrackerApiController < PrivateController
       @project = params[:name]
     end
   end
-
 end
