@@ -37,7 +37,7 @@
             %th
               %b Name
           %tbody
-            -@projects.each do |project|
+            -@tracker_projects.each do |project|
               %tr
                 %td
                   = link_to project[:name], tracker_api_path(project[:id], project_name: project[:name])

@@ -11,7 +11,11 @@ class ProjectsController < PrivateController
     @project_admins = Project.all
     tracker_api = TrackerAPI.new
     if current_user.pivotal_tracker_token
-      @tracker_projects = tracker_api.projects(current_user.pivotal_tracker_token)
+      if tracker_api.projects(current_user.pivotal_tracker_token).is_a? Array
+        @tracker_projects = tracker_api.projects(current_user.pivotal_tracker_token)
+      else
+        flash[:error] = 'Your token is wrong'
+      end
     end
   end
 
