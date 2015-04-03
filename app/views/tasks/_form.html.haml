@@ -13,7 +13,7 @@
   .form-group
     = f.label :due_date, class: "col-md-2 control-label"
     .col-md-3
-      = f.text_field :due_date, class: "form-control", placeholer:"Due Date"
+      = f.date_field :due_date, class: "form-control", placeholer:"Due Date"
 
   -unless @task.new_record?
     .form-group
