@@ -10,10 +10,7 @@ class TrackerAPI
       req.headers['Content-Type'] = 'application/json'
       req.headers['X-TrackerToken'] = token
     end
-    if response.success?
-      valid_response = JSON.parse(response.body, symbolize_names: true)
-    end
-    valid_response
+    JSON.parse(response.body, symbolize_names: true)
   end
 
   def stories(token, project_id)
@@ -22,11 +19,6 @@ class TrackerAPI
       req.headers['Content-Type'] = 'application/json'
       req.headers['X-TrackerToken'] = token
     end
-
-    if response.success?
-      valid_response = JSON.parse(response.body, symbolize_names: true)
-    end
-    valid_response
+    JSON.parse(response.body, symbolize_names: true)
   end
-
 end

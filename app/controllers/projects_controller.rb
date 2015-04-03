@@ -8,17 +8,12 @@ class ProjectsController < PrivateController
 
   def index
     @projects = current_user.projects
-    @membership = Membership.all
-    @project_admins = Project.all
+    @admin_projects = Project.all
     tracker_api = TrackerAPI.new
-     if current_user.pivotal_tracker_token
-       if tracker_api.projects(current_user.pivotal_tracker_token).class == Array
-         @projects = tracker_api.projects(current_user.pivotal_tracker_token)
-       else
-         flash.now[:error] = "Your token is invalid"
-       end
-     end
-end
+    if current_user.pivotal_tracker_token
+      @tracker_projects = tracker_api.projects(current_user.pivotal_tracker_token)
+    end
+  end
 
   def new
     @project = Project.new
