@@ -1,29 +1,37 @@
+<!doctype html>
+%html
+  %head
+    %title Grids
+    %link{:href => "reset.css", :rel => "stylesheet", :type => "text/css"}
+    %link{:href => "app.css", :rel => "stylesheet", :type => "text/css"}
+  %body
+
 .container
   .jumbotron
     %h1 gCamp
     %p Your life, organized
   .row
-    .col-md-4
-      %p.lead= image_tag("1.jpg", class:"img-responsive")
-    .col-md-4
-      %p.lead= image_tag("2.jpg", class:"img-responsive")
-    .col-md-4
-      %p.lead= image_tag("3.jpg", class:"img-responsive")
+    .col-4
+      %p.lead= image_tag("1.jpg", class:"img")
+    .col-4
+      %p.lead= image_tag("2.jpg", class:"img")
+    .col-4
+      %p.lead= image_tag("3.jpg", class:"img")
   %ul
   .row
-    .col-md-4
+    .col-4
       .panel.panel-primary
         .panel-heading
           %h3.panel-title Tasks
         .panel-body
           Grouped by projects and lists. Just the way you like'em
-    .col-md-4
+    .col-4
       .panel.panel-primary
         .panel-heading
           %h3.panel-title Permissions
         .panel-body
           Fine-grained permissions
-    .col-md-4
+    .col-4
       .panel.panel-primary
         .panel-heading
           %h3.panel-title Comments
@@ -46,4 +54,5 @@
             %em= @quotes_array [2][:content]
             .text-muted
               %em= @quotes_array [2][:author]
-    
+
+</body>
